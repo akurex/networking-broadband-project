@@ -1,0 +1,25 @@
+sm5
+
+
+conf t
+
+hostname sm5
+
+int serial 0
+ip add 102.102.102.2 255.255.255.252
+no shut
+
+interface Loopback1
+ip address 10.10.10.8 255.255.255.255
+
+ip prefix-list LOOPBACK seq 5 permit 10.10.10.8/32
+
+route-map LOOPBACK permit 10
+match ip address prefix-list LOOPBACK
+
+router eigrp 65003
+network 102.102.102.0 0.0.0.3
+network 192.168.3.0 0.0.0.255
+redistribute connected route-map LOOPBACK
+
+

@@ -1,0 +1,23 @@
+si4
+
+
+conf t
+
+hostname si5
+
+int serial 1
+ip add 101.101.101.2 255.255.255.252
+no shut
+
+interface Loopback1
+ip address 10.10.10.5 255.255.255.255
+
+ip prefix-list LOOPBACK seq 5 permit 10.10.10.8/32
+
+route-map LOOPBACK permit 10
+match ip address prefix-list LOOPBACK
+
+router eigrp 65001
+network 101.101.101.0 0.0.0.3
+network 192.168.1.0 0.0.0.255
+redistribute connected route-map LOOPBACK

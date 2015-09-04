@@ -1,0 +1,13 @@
+SI1
+
+interface Loopback1
+ ip address 10.10.10.4 255.255.255.255
+
+ip prefix-list LOOPBACK seq 5 permit 10.10.10.4/32
+
+route-map LOOPBACK permit 10
+ match ip address prefix-list LOOPBACK
+
+router bgp 65001
+ redistribute connected route-map LOOPBACK
+ neighbor 100.100.100.1 remote-as 1 

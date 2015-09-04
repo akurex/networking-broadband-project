@@ -1,0 +1,14 @@
+ST6
+conf t
+
+interface Loopback1
+ ip address 10.10.10.6 255.255.255.255
+
+ip prefix-list LOOPBACK seq 5 permit 10.10.10.6/32
+
+route-map LOOPBACK permit 10
+ match ip address prefix-list LOOPBACK
+
+router bgp 65002
+ redistribute connected route-map LOOPBACK
+ neighbor 105.105.105.1 remote-as 1 

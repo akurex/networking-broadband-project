@@ -1,0 +1,18 @@
+SI1
+
+conf t
+int fa0/1
+standby 1 ip 192.168.1.1
+standby 1 priority 104
+standby 1 preempt 
+standby 1 track fa0/0 5
+
+
+si4
+
+conf t
+int fa0
+standby 1 ip 192.168.1.1
+standby 1 priority 100
+standby 1 preempt 
+standby 1 track serial0/0/0 5

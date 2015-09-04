@@ -1,0 +1,17 @@
+ST6
+
+
+conf t
+hostname ST6
+
+interface FastEthernet 0/0
+ip address 105.105.105.2 255.255.255.252
+no shut
+
+
+
+ST8
+
+interface FastEthernet 0/1
+ip address 106.106.106.2 255.255.255.252
+no shut

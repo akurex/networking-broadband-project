@@ -1,0 +1,27 @@
+P4
+
+router bgp 1
+address-family ipv4 vrf Serv
+redistribute connected
+neighbor 100.100.100.2 remote-as 65001  
+neighbor 100.100.100.2 activate
+
+neighbor 101.101.101.2 remote-as 65001  
+neighbor 101.101.101.2 activate
+
+neighbor 102.102.102.2 remote-as 65003  
+neighbor 102.102.102.2 activate
+
+
+
+P5
+
+router bgp 1
+address-family ipv4 vrf Serv
+redistribute connected
+
+neighbor 105.105.105.2 remote-as 65002  
+neighbor 105.105.105.2 activate
+
+neighbor 106.106.106.2 remote-as 65002  
+neighbor 106.106.106.2 activate

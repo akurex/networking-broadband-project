@@ -1,0 +1,53 @@
+P2
+
+conf t
+hostname P2
+
+interface loopback 0
+ip address 10.10.10.2 255.255.255.255
+
+interface Serial 0/0/1
+ip address 10.1.70.1 255.255.255.252
+clock rate 64000
+ip router isis
+no shutdown
+
+interface Serial 0/0/0
+ip address 10.1.71.2 255.255.255.252
+clock rate 8000000
+ip router isis
+no shutdown
+
+router isis
+net 49.0001.0102.0102.0102.00
+passive-interface Loopback0
+is-type level-1
+
+end
+
+conf t
+
+router bgp 1
+
+no auto-summary
+no synchronization
+
+neighbor 10.10.10.1 remote-as 1
+neighbor 10.10.10.1 update-source Loopback0
+neighbor 10.10.10.1 route-reflector-client
+
+neighbor 10.10.10.3 remote-as 1
+neighbor 10.10.10.3 update-source Loopback0
+neighbor 10.10.10.3 route-reflector-client
+no auto-summary
+
+address-family vpnv4
+neighbor 10.10.10.1 activate
+neighbor 10.10.10.1 send-community extended
+neighbor 10.10.10.1 route-reflector-client
+
+neighbor 10.10.10.3 activate
+neighbor 10.10.10.3 send-community extended
+neighbor 10.10.10.3 route-reflector-client
+
+end

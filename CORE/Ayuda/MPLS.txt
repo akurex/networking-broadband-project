@@ -1,0 +1,27 @@
+P4
+
+ip cef
+mpls ip
+mpls label protocol ldp
+mpls ldp router-id loopback 0 force
+
+
+interface Serial 0/1/1
+mpls ip
+mpls label protocol ldp
+
+
+
+
+P5
+
+
+ip cef
+mpls ip
+mpls label protocol ldp
+mpls ldp router-id loopback 0 force
+
+
+interface Serial 0/0/0
+mpls ip
+mpls label protocol ldp

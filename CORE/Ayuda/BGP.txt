@@ -1,0 +1,47 @@
+P4
+
+router bgp 1
+neighbor 10.10.10.2 remote-as 1
+neighbor 10.10.10.2 update-source Loopback0
+no auto-summary
+
+address-family vpnv4
+neighbor 10.10.10.2 activate
+neighbor 10.10.10.2 send-community extended
+
+
+
+P5
+
+router bgp 1
+neighbor 10.10.10.2 remote-as 1
+neighbor 10.10.10.2 update-source Loopback0
+no auto-summary
+
+address-family vpnv4
+neighbor 10.10.10.2 activate
+neighbor 10.10.10.2 send-community extended
+
+
+
+P2
+
+
+router bgp 1
+neighbor 10.10.10.1 remote-as 1
+neighbor 10.10.10.1 update-source Loopback0
+neighbor 10.10.10.1 route-reflector-client
+
+neighbor 10.10.10.3 remote-as 1
+neighbor 10.10.10.3 update-source Loopback0
+neighbor 10.10.10.3 route-reflector-client
+no auto-summary
+
+address-family vpnv4
+neighbor 10.10.10.1 activate
+neighbor 10.10.10.1 send-community extended
+neighbor 10.10.10.1 route-reflector-client
+
+neighbor 10.10.10.3 activate
+neighbor 10.10.10.3 send-community extended
+neighbor 10.10.10.3 route-reflector-client

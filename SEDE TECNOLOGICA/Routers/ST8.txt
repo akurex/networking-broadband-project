@@ -1,0 +1,30 @@
+ST6
+
+
+
+conf t
+hostname ST8
+
+interface FastEthernet 0/0
+ip address 106.106.106.2 255.255.255.252
+no shut
+
+
+conf t
+
+interface Loopback1
+ ip address 10.10.10.7 255.255.255.255
+
+ip prefix-list LOOPBACK seq 5 permit 10.10.10.7/32
+
+route-map LOOPBACK permit 10
+ match ip address prefix-list LOOPBACK
+
+router bgp 65002
+
+no auto-summary
+no synchronization
+
+redistribute connected route-map LOOPBACK
+neighbor 106.106.106.1 remote-as 1 
+network 192.168.2.0 mask 255.255.255.0

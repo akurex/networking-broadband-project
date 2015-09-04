@@ -1,0 +1,65 @@
+P4
+
+hostname P4
+interface loopback 0
+ip address 10.10.10.1 255.255.255.255
+
+interface Serial 0/1/1
+ip address 10.1.69.1 255.255.255.252
+ip router isis
+no shutdown
+
+interface Serial 0/1/0
+ip address 10.1.70.2 255.255.255.252
+ip router isis
+no shutdown
+
+router isis
+net 49.0001.0100.0100.0100.00
+passive-interface Loopback0
+is-type level-1
+
+
+P2
+
+hostname P2
+
+interface loopback 0
+ip address 10.10.10.2 255.255.255.255
+
+interface Serial 0/0/1
+ip address 10.1.70.1 255.255.255.252
+ip router isis
+no shutdown
+
+interface Serial 0/0/0
+ip address 10.1.71.2 255.255.255.252
+ip router isis
+no shutdown
+
+router isis
+net 49.0001.0102.0102.0102.00
+passive-interface Loopback0
+is-type level-1
+
+
+P5
+
+hostname P5
+interface loopback 0
+ip address 10.10.10.3 255.255.255.255
+
+interface Serial 0/0/1
+ip address 10.1.71.1 255.255.255.252
+ip router isis
+no shutdown
+
+interface Serial 0/0/0
+ip address 10.1.69.2 255.255.255.252
+ip router isis
+no shutdown
+
+router isis
+net 49.0001.0103.0103.0103.00
+passive-interface Loopback0
+is-type level-1
